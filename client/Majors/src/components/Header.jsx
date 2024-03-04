@@ -40,31 +40,32 @@ function Header() {
             change ? "top-20 opacity-100" : "top-[-490px]"
           } md:opacity-100 `}
         >
-          <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `block duration-200 ${
-                        isActive ? "text-[#ff8a00]" : "text-slate-700"
-                      } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-[#e87d02] lg:p-0`
-                    }
-                  >
+        
 
-          <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
-            Home
+          <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500 ">
+          <NavLink to="/"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-[#ff7b00]" : "text-slate-900"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    {/* isActive url se detect krta hai */}
+                                    Home
+                                </NavLink>
           </li>
-          </NavLink>
-          <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                      `block duration-200 ${
-                        isActive ? "text-[#ff8a00]" : "text-slate-700"
-                      } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-[#e87d02] lg:p-0`
-                    }
-                  >
+          
+          
           <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
-            About
+            
+            <NavLink to="/about"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-[#ff7b00]" : "text-slate-900"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    {/* isActive url se detect krta hai */}
+                                    About
+                                </NavLink>
           </li>
-          </NavLink>
+          
           {/* <Link to="/profile">
             {currentUser ? (
               <img
@@ -76,11 +77,18 @@ function Header() {
               <li className=" text-slate-700 hover:underline">Sign In</li>
             )}
           </Link> */}
-          <Link to='/contact'>
+          
           <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
-            Contact
+          <NavLink to="/contact"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-[#ff7b00]" : "text-slate-900"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    {/* isActive url se detect krta hai */}
+                                    Contact
+                                </NavLink>
           </li>
-          </Link>
+          
           <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
             Admin
           </li>
