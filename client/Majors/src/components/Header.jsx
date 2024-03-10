@@ -110,9 +110,11 @@ function Header() {
             className="flex
          gap-4 md:ml-8 flex-col md:flex-row"
           >
+            <Link to='/section'>
             <button className="bg-[#ff8a00] text-sm p-2 w-[90px] border rounded-lg md:w-[120px] md:text-lg font-semibold h-[57px] text-white hover:bg-[#ff7b00]">
               Get Started
             </button>
+            </Link>
             <Link to='/login'>
             <button className="bg-[#0c24ff] text-sm p-2 w-[90px] border rounded-lg md:w-[120px]  md:text-lg  font-semibold h-[57px] text-white hover:opacity-80">
               Login

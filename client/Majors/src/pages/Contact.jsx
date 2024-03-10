@@ -1,9 +1,10 @@
 import React from 'react'
+import { ScrollRestoration } from 'react-router-dom'
 
 function Contact() {
   return (
     <>
-    
+    <ScrollRestoration />
     <section className="text-gray-600 body-font relative m-2 p-2">
   <div className="absolute inset-0 bg-gray-300">
     <iframe width="100%" height="100%" frameBorder="0" marginHeight="0" marginWidth="0" title="map" scrolling="no" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Indira Bhavan 762, Mahavir Puri Road, Mahaveerpuri, Govindpur, Teliarganj, Prayagraj, Uttar Pradesh 211004&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" ></iframe>

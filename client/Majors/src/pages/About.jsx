@@ -1,12 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
+import { ScrollRestoration } from "react-router-dom";
 
 function About() {
   return (
     <>
 
-      {/* Done About Page! 01 Mar 24 1:24AM */}
+      {/* Done About Page! 01 Mar 24 1:2 4AM */}
       {/* what is StuTechmap */}
+      <ScrollRestoration />
       <section className="text-gray-600 body-font">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">

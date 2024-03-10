@@ -1,49 +1,53 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
+//import { useActionData } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function LogIn() {
+
+    useLayoutEffect(() => {
+        document.querySelector('body').style.backgroundImage = "url('../img/BG.png')"
+    }, [])
+    
+
   return (
     <>
         
-    <div class="main h-[600px]  w-[1100px] border mt-[80px] m-auto flex rounded-md flex-row bg-[#ffffff]">
-        <div class="first">
-            <img src="./images/LoginImage.png" alt="" class="h-[598px] rounded-3xl " />
-        </div>
-        <div class="m-auto hover:shadow-md">
-            <form action="">
-
-                <div
-                    class="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg border-[0.1px] border-black dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 ">
-                    <div class="self-center mb-6 text-4xl text-[#002057] font-semibold sm:text-2xl dark:text-white">
-                        Log In
-                    </div>
-                    <div class="flex gap-4 item-center">
-                        <button type="button"
-                            class="py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                            <svg width="20" height="20" fill="currentColor" class="mr-2" viewBox="0 0 1792 1792"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z">
-                                </path>
-                            </svg>
-                            Facebook
-                        </button>
-                        <button type="button"
-                            class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                            <svg width="20" height="20" fill="currentColor" class="mr-2" viewBox="0 0 1792 1792"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z">
-                                </path>
-                            </svg>
-                            Google
-                        </button>
-                    </div>
-                    <div class="mt-8">
-                        <form action="#" autoComplete="off">
-                            <div class="flex flex-col mb-2">
-                                <div class="flex relative ">
-                                    <span
-                                        class="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+        <div className=" container mx-auto mt-28 flex flex-col md:flex-row  rounded-2xl ">
+                <div className="w-full md:w-1/2 flex justify-center">
+                    <img src="./img/Login.png" alt="Login Image" className="w-full md:max-w-lg rounded-3xl" />
+                </div>
+                <div className="w-full md:w-1/2  flex justify-center items-center">
+                    <form className="w-full max-w-md">
+                        <div className="bg-slate-100 shadow-md rounded-2xl px-8 py-8 mb-1">
+                        {/* dark:bg-gray-800  */}
+                            <div className="mb-6 text-4xl text-blue-900 font-semibold text-center">
+                            {/* dark:text-white */}
+                                Log In</div>
+                            <div className="mb-4">
+                                <button type="button"
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center justify-center">
+                                    <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 1792 1792"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z">
+                                        </path>
+                                    </svg>
+                                    Facebook
+                                </button>
+                                <button type="button"
+                                    className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg flex items-center justify-center mt-2">
+                                    <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 1792 1792"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z">
+                                        </path>
+                                    </svg>
+                                    Google
+                                </button>
+                            </div>
+                            <div className="mb-4">
+                                <div className="flex items-center mb-4">
+                                    <span className="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                                         <svg width="15" height="15" fill="currentColor" viewBox="0 0 1792 1792"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -51,15 +55,12 @@ function LogIn() {
                                             </path>
                                         </svg>
                                     </span>
-                                    <input type="text" id="sign-in-email"
-                                        class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
-                                        placeholder="Your email" />
+                                    <input
+                                        className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
+                                        type="text" placeholder="Email" />
                                 </div>
-                            </div>
-                            <div class="flex flex-col mb-6">
-                                <div class="flex relative ">
-                                    <span
-                                        class="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                                <div className="flex items-center mb-6">
+                                    <span className="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                                         <svg width="15" height="15" fill="currentColor" viewBox="0 0 1792 1792"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -67,41 +68,39 @@ function LogIn() {
                                             </path>
                                         </svg>
                                     </span>
-                                    <input type="password" id="sign-in-email"
-                                        class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
-                                        placeholder="Your password" />
+                                    <input
+                                        className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray -400 focus:outline-none focus:ring focus:border-blue-300"
+                                        type="password" placeholder="Password" />
                                 </div>
-                            </div>
-                            <div class="flex items-center mb-6 -mt-4">
-                                <div class="flex ml-auto">
+                                <div className="flex justify-end">
                                     <a href="#"
-                                        class="inline-flex text-xs font-normal text-[#0020578e] sm:text-sm dark:text-gray-100 hover:text-gray-900 dark:hover:text-white">
-                                        Forgot Your Password?
-                                    </a>
+                                        className="text-xs text-blue-600">
+                                             {/* dark:text-slate-100 */}
+                                            Forgot Your Password?</a>
                                 </div>
                             </div>
-                            <div class="flex w-full">
+                            <div className="mb-6">
                                 <button type="submit"
-                                    class="py-2 px-4  bg-[#ff8a00] hover:bg-[#ff7b00] focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                                    className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                                     Login
                                 </button>
                             </div>
-                        </form>
-                    </div>
-                    <div class="flex items-center justify-center mt-6">
-                        <a href="#" target="_blank"
-                            class="inline-flex items-center text-sm font-normal text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">
-                            <span class="ml-2">
-                                Don&#x27;t Have An Account? <span class="text-[#0c24ff]">Sign Up</span>
-                            </span>
-                        </a>
-                    </div>
+                            <p className="text-center text-gray-500 text-sm">
+
+                                Don't Have An Account?
+                                <Link to='/signup'>
+                                <a href=""
+                                    className="text-blue-600 hover:text-blue-800 ">
+                                        {/* dark:text-[#fa8a00] */}
+                                        Sign Up
+                                </a>
+                                </Link>
+                            </p>
+                        </div>
+                    </form>
                 </div>
-
-
-            </form>
-        </div>
-    </div>
+            </div>
+        
 
     </>
   )

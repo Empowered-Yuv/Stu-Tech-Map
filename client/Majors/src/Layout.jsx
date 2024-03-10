@@ -1,15 +1,21 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
 
 function Layout() {
+
+  const location = useLocation()
+  const login = location.pathname === '/login'
+  const section = location.pathname === '/section'
+  const signup = location.pathname === '/signup'
+  const dec = !(login || section || signup)
   return (
     <>
-    <Header />
+    {dec && <Header />}
     <Outlet />
-    <Footer />
+    {dec && <Footer />}
     
     </>
   )
