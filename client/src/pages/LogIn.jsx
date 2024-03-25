@@ -4,27 +4,26 @@ import { Link } from 'react-router-dom'
 
 function LogIn() {
 
-    useLayoutEffect(() => {
-        document.querySelector('body').style.backgroundImage = "url('../img/BG.png')"
-    }, [])
+    
     
 
   return (
     <>
         
-        <div className=" container mx-auto mt-28 flex flex-col md:flex-row  rounded-2xl ">
+        <div className='w-full h-screen flex justify-center items-center m-auto bg-[url("../img/Bg.jpg")]'>
+            <div className="container bg-white flex flex-col md:flex-row rounded-2xl w-3/4">
                 <div className="w-full md:w-1/2 flex justify-center">
                     <img src="./img/Login.png" alt="Login Image" className="w-full md:max-w-lg rounded-3xl" />
                 </div>
-                <div className="w-full md:w-1/2  flex justify-center items-center">
+                <div className="w-full md:w-1/2 flex justify-center items-center">
                     <form className="w-full max-w-md">
-                        <div className="bg-slate-100 shadow-md rounded-2xl px-8 py-8 mb-1">
+                        <div className="bg-slate-100 shadow-md rounded-2xl px-8 py-8 mb-1 ">
                         {/* dark:bg-gray-800  */}
-                            <div className="mb-6 text-4xl text-blue-900 font-semibold text-center">
+                            <div className="mb-6 text-4xl text-blue-900 font-semibold text-center ">
                             {/* dark:text-white */}
                                 Log In</div>
                             <div className="mb-4">
-                                <button type="button"
+                                {/* <button type="button"
                                     className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center justify-center">
                                     <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 1792 1792"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +32,7 @@ function LogIn() {
                                         </path>
                                     </svg>
                                     Facebook
-                                </button>
+                                </button> */}
                                 <button type="button"
                                     className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg flex items-center justify-center mt-2">
                                     <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 1792 1792"
@@ -74,31 +73,32 @@ function LogIn() {
                                 </div>
                                 <div className="flex justify-end">
                                     <a href="#"
-                                        className="text-xs text-blue-600">
-                                             {/* dark:text-slate-100 */}
+                                        className="text-xs text-blue-600 ">
+                                            {/* dark:text-slate-100 */}
                                             Forgot Your Password?</a>
                                 </div>
                             </div>
                             <div className="mb-6">
+                                
                                 <button type="submit"
                                     className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                                     Login
                                 </button>
+                            
                             </div>
                             <p className="text-center text-gray-500 text-sm">
 
                                 Don't Have An Account?
-                                <Link to='/signup'>
+                            <Link to={'/signup'}>
                                 <a href=""
                                     className="text-blue-600 hover:text-blue-800 ">
                                         {/* dark:text-[#fa8a00] */}
-                                        Sign Up
-                                </a>
-                                </Link>
+                                        Sign Up</a></Link>
                             </p>
                         </div>
                     </form>
                 </div>
+            </div>
             </div>
         
 
