@@ -1,7 +1,7 @@
 import { asyncHandler } from '../utils/asyncHandler.js'
 import { ApiError } from "../utils/ApiError.js"
 import { User } from "../models/user.models.js"
-import { uploadOnCloudinary } from "../utils/cloudinary.js"
+//import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 
 
@@ -41,7 +41,12 @@ const registerUser = asyncHandler(async (req, res) => {
         }
     
         // Validate email format
-        if (!email.includes("@")) {
+
+        function isValidEmail(e) {
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(e)
+        }
+
+        if (!isValidEmail(email)) {
             throw new ApiError(400, "Invalid email id");
         }
     
@@ -57,19 +62,18 @@ const registerUser = asyncHandler(async (req, res) => {
         }
     
         // Get the avatar local path from the request files
-        const avatarLocalPath = req.file?.avatar?.[0]?.path;
+        // const avatarLocalPath = req.file?.avatar?.[0]?.path;
     
         // Upload avatar to Cloudinary if available
-        let avatarUrl = "https://i.ibb.co/5THrMrM/icons8-user-94.png"; // Default avatar URL
-        if (avatarLocalPath) {
-            const uploadedAvatar = await uploadOnCloudinary(avatarLocalPath);
-            avatarUrl = uploadedAvatar?.url || avatarUrl; // Update avatar URL if upload was successful
-        }
+       // let avatarUrl = "https://i.ibb.co/5THrMrM/icons8-user-94.png"; // Default avatar URL
+        // if (avatarLocalPath) {
+        //     const uploadedAvatar = await uploadOnCloudinary(avatarLocalPath);
+        //     avatarUrl = uploadedAvatar?.url || avatarUrl; // Update avatar URL if upload was successful
+        // }
     
         // Create user in the database
         const user = await User.create({
             fullName,
-            avatar: avatarUrl,
             email,
             password,
             username: username.toLowerCase()
@@ -113,17 +117,33 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const loginUser = asyncHandler( async (req, res) => {
     //req body ---> data
-    const {email, username, password} = req.body
+    const {identifier, password} = req.body
 
+
+    
     // username or email
-    if (!(username || email)) {
+    if (!identifier) {
         throw new ApiError(400, "usernname or email is required")
     }
 
+    function isValidEmail(e) {
+        return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(e)
+    }
+
+    let user
+
+    if (isValidEmail(identifier)) {
+        // Input is an email, find user by email
+        user = await User.findOne({ email: identifier })
+    }
+    else {
+        user = await User.findOne({ username: identifier })
+    }
+
     // find the user
-    const user = await User.findOne({
-        $or: [{ username }, { email }]
-    })
+    // const user = await User.findOne({
+    //     $or: [{ username }, { email }]
+    // })
 
     if (!user) {
         throw new ApiError(404, "User doesnt exist!")

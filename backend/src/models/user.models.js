@@ -27,6 +27,7 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
+        default: "https://i.ibb.co/5THrMrM/icons8-user-94.png"
     },
     refreshToken: {
         type: String,
