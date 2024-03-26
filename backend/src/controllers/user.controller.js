@@ -3,8 +3,7 @@ import { ApiError } from "../utils/ApiError.js"
 import { User } from "../models/user.models.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
-import { v2 as cloudinary, uploader } from 'cloudinary'
-import mongoose from 'mongoose'
+
 
 
 
@@ -34,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     // Get the avatar local path from the request files
-    const avatarLocalPath = req.files?.avatar?.[0]?.path;
+    const avatarLocalPath = req.file?.avatar?.[0]?.path;
 
     // Upload avatar to Cloudinary if available
     let avatarUrl = "https://i.ibb.co/5THrMrM/icons8-user-94.png"; // Default avatar URL

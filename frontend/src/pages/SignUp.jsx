@@ -1,7 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 function SignUp() {
+
+  const [formData, setFormData] = useState({})
+
+  const [error, setError] = useState(null)
+
+  const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    })
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    try {
+      const res = await axios.post('/api/v1/users/signup', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+
+      const data = await res.data
+      //console.log(data);
+
+      if (data.success === false) {
+        setLoading(false)
+        setError(data.message)
+
+        return
+      }
+      setLoading(false);
+      setError(null);
+      navigate('/login');
+    } catch (error) {
+      setLoading(false);
+      setError(error.message)
+    }
+  }
+
+
+
+
+
   return (
     <>
     
@@ -15,7 +64,7 @@ function SignUp() {
             />
           </div>
           <div className="my-auto hover:shadow-md w-1/2">
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg border-[0.1px] border-black  sm:px-6 md:px-8 lg:px-10 mx-10">
   
                {/* dark:bg-gray-800 */}
@@ -59,7 +108,7 @@ function SignUp() {
                   </button>
                 </div>
                 <div className="mt-8">
-                  <form action="#" autoComplete="off">
+                  
                     <div className="flex flex-col mb-2">
                       <div className="flex relative ">
                         <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -71,9 +120,10 @@ function SignUp() {
                         </span>
                         <input
                           type="text"
-                          id="sign-in-email"
+                          id="fullName"
                           className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
                           placeholder="Name"
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -88,9 +138,10 @@ function SignUp() {
                         </span>
                         <input
                           type="text"
-                          id="sign-in-email"
+                          id="username"
                           className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
                           placeholder="Username"
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -109,9 +160,10 @@ function SignUp() {
                         </span>
                         <input
                           type="text"
-                          id="sign-in-email"
+                          id="email"
                           className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
                           placeholder="Email"
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -130,29 +182,27 @@ function SignUp() {
                         </span>
                         <input
                           type="password"
-                          id="sign-in-email"
+                          id="password"
                           className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
                           placeholder="Password"
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
 
                     <div className="flex w-full">
                       <button
+                        disabled={loading}
                         type="submit"
                         className="py-2 px-4  bg-[#ff8a00] hover:bg-[#ff7b00] focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                       >
-                        Sign Up
+                        {loading ? 'Loading...' : 'Sign Up'}
                       </button>
                     </div>
-                  </form>
+                  \
                 </div>
                 <div className="flex items-center justify-center mt-6">
-                  <a
-                    href="./pages/LogIn.jsx"
-                    target="_blank"
-                    className="inline-flex items-center text-sm font-normal text-center text-gray-500 hover:text-gray-700 "
-                  >
+                  
                     {/* dark:text-gray-100 dark:hover:text-white */}
                     <span className="ml-2">
                       Already Have An Account?{" "}
@@ -164,9 +214,13 @@ function SignUp() {
                       </span>
                       </Link>
                     </span>
-                  </a>
+                  
                 </div>
+                <div className="text-center">
+      {error && <p className='text-red-500 mt-5'>{error}</p>}
+    </div>
               </div>
+              
             </form>
           </div>
         </div>
