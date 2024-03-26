@@ -6,7 +6,7 @@ function SignUp() {
 
   const [formData, setFormData] = useState({})
 
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('')
 
   const [loading, setLoading] = useState(false)
 
@@ -19,34 +19,37 @@ function SignUp() {
     })
   }
 
-  const handleSubmit = async(e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
+      setLoading(true); // Set loading state to true when submitting the form
       const res = await axios.post('/api/v1/users/signup', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
-
-      const data = await res.data
-      //console.log(data);
-
-      if (data.success === false) {
-        setLoading(false)
-        setError(data.message)
-
-        return
+  
+      // Remove .data from res
+      console.log(res);
+  
+      if (res.success === false) {
+        setLoading(false);
+        setError(res.data);
+        return;
       }
       setLoading(false);
       setError(null);
       navigate('/login');
     } catch (error) {
       setLoading(false);
-      setError(error.message)
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data);
+      } else {
+        setError('Registration failed. Please try again later.');
+      }
     }
-  }
-
+  };
+  
 
 
 
@@ -217,7 +220,7 @@ function SignUp() {
                   
                 </div>
                 <div className="text-center">
-      {error && <p className='text-red-500 mt-5'>{error}</p>}
+      {error && <p className='text-red-500 mt-5'>{error.data}</p>}
     </div>
               </div>
               

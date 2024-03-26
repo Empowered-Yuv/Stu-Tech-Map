@@ -4,6 +4,8 @@ import { persistStore, persistReducer } from 'redux-persist'
 
 import storage from 'redux-persist/lib/storage'
 
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+
 
 const rootReducer = combineReducers({user: userReducer})
 
