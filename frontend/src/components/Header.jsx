@@ -98,7 +98,7 @@ function Header() {
             className="flex
          gap-4 md:ml-8 flex-col md:flex-row"
           >
-            {currentUser ? (
+            {/* {currentUser ? (
             // <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
             //   <button onClick={handleLogout}>Logout</button>
             // </li>
@@ -107,7 +107,7 @@ function Header() {
                 src={currentUser.avatar}
                 alt="profile"
               />
-          ) : (
+          ) : ( */}
             <div className="flex gap-4 md:ml-8 flex-col md:flex-row">
               <Link to="/section">
                 <button className="bg-[#ff8a00] text-sm p-2 w-[90px] border rounded-lg md:w-[120px] md:text-lg font-semibold h-[57px] text-white hover:bg-[#ff7b00]">
@@ -120,7 +120,7 @@ function Header() {
                 </button>
               </Link>
             </div>
-          )}
+          {/* )} */}
           </div>
 
           
