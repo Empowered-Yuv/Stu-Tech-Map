@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 
 function Header() {
   const [change, setChange] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+  const [avatarUrl, setAvatarUrl] = useState('');
+
+  useEffect(() => {
+    const fetchAvatarUrl = async () => {
+      try {
+        const res = await axios.get('/api/v1/users/get-current-user-avatar');
+        console.log(res.data.data);
+        setAvatarUrl(res.data.data);
+      } catch (error) {
+        console.error('Error fetching avatar URL:', error);
+        // Handle error gracefully, such as setting a default avatar URL
+      }
+    };
+
+    fetchAvatarUrl();
+  }, []);
 
   return (
     <header className="shadow-md w-full sticky top-0 left-0 z-50">
@@ -54,18 +71,6 @@ function Header() {
                                 </NavLink>
           </li>
           
-          {/* <Link to="/profile">
-            {currentUser ? (
-              <img
-                className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.avatar}
-                alt="profile"
-              />
-            ) : (
-              <li className=" text-slate-700 hover:underline">Sign In</li>
-            )}
-          </Link> */}
-          
           <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
           <NavLink to="/contact"
                                     className={({isActive}) =>
@@ -78,36 +83,40 @@ function Header() {
           </li>
           
           <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
-            Admin
+          <NavLink to="/admin"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-[#ff7b00]" : "text-slate-900"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    {/* isActive url se detect krta hai */}
+                                    Admin
+                                </NavLink>
           </li>
 
           <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
-            Resources
+          <NavLink to="/resources"
+                                    className={({isActive}) =>
+                                        `block py-2 pr-4 pl-3 duration-200 ${isActive ? "text-[#ff7b00]" : "text-slate-900"} border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                    }
+                                >
+                                    {/* isActive url se detect krta hai */}
+                                    Resources
+                                </NavLink>
           </li>
-
-          {/* <button className="bg-[#ff8a00] text-sm p-2 w-[90px] border rounded-lg md:w-[120px] md:text-lg font-semibold h-[57px] text-white md:ml-8">
-          Get Started
-        </button>
-
-
-        <button className="bg-[#0c24ff] text-sm p-2 w-[90px] border rounded-lg md:w-[120px]  md:text-lg  font-semibold h-[57px] text-white md:ml-8">
-          Login
-        </button> */}
 
           <div
             className="flex
          gap-4 md:ml-8 flex-col md:flex-row"
           >
-            {/* {currentUser ? (
-            // <li className="md:ml-8 md:my-0 my-7 md:inline text-slate-900 font-semibold text-xl hover:underline duration-500">
-            //   <button onClick={handleLogout}>Logout</button>
-            // </li>
+             {currentUser ? (
+            
             <img
-                className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.avatar}
+                className="rounded-full h-10 w-10 object-cover"
+                src={avatarUrl}
                 alt="profile"
               />
-          ) : ( */}
+             
+           ) : (  
             <div className="flex gap-4 md:ml-8 flex-col md:flex-row">
               <Link to="/section">
                 <button className="bg-[#ff8a00] text-sm p-2 w-[90px] border rounded-lg md:w-[120px] md:text-lg font-semibold h-[57px] text-white hover:bg-[#ff7b00]">
@@ -120,7 +129,7 @@ function Header() {
                 </button>
               </Link>
             </div>
-          {/* )} */}
+           )}
           </div>
 
           

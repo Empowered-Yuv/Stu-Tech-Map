@@ -116,11 +116,11 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   //req body ---> data
   try {
-    const { identifier, password } = req.body;
+    const { email, password } = req.body;
 
     // username or email
-    if (!identifier) {
-      throw new ApiError(400, "usernname or email is required");
+    if (!email) {
+      throw new ApiError(400, "Email is required");
     }
 
     function isValidEmail(e) {
@@ -129,11 +129,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
     let user;
 
-    if (isValidEmail(identifier)) {
+    if (isValidEmail(email)) {
       // Input is an email, find user by email
-      user = await User.findOne({ email: identifier });
+      user = await User.findOne({ email });
     } else {
-      user = await User.findOne({ username: identifier });
+      throw new ApiError(400, "Invalid Email")
     }
 
     //If user exists or not
@@ -191,4 +191,60 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser };
+
+// Get avatar URL for logged-in user route
+const getUser = asyncHandler( async (req, res) =>{
+  
+  return res.status(200)
+    .json(new ApiResponse(
+        200, req.user, "Current User fetched Successfully"
+    ))
+} )
+
+
+const getUserAvatar = asyncHandler( async(req, res) => {
+  try {
+    // Example: Retrieve user's avatar URL based on user ID from JWT token
+    const userId = req.user._id; // Assuming you have middleware to extract user ID from JWT token
+    const user = await User.findById(userId);
+    if (!user || !user.avatar) {
+      return res
+      .status(404)
+      .json(
+        new ApiResponse(
+          404,
+          {},
+          "Avatar not found"
+        )
+      )
+    }
+    res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        user.avatar,
+        "Fetched Successfully"
+      )
+    )
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return res
+        .status(error.statusCode)
+        .json(new ApiResponse(error.statusCode, error.data, error.message));
+    } else {
+      console.error(error);
+      return res.status(500).json(new ApiResponse(500, "Server Error"));
+    }
+  }
+} )
+  
+
+
+export 
+{
+  registerUser,
+  loginUser,
+  getUser,
+  getUserAvatar
+}

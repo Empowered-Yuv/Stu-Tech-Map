@@ -42,7 +42,7 @@ function LogIn() {
       const res = await axios.post(
         "/api/v1/users/login",
         {
-          identifier: inputValue,
+          email: inputValue,
           password: pass,
         },
         {
