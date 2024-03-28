@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { loginUser, registerUser, getUser, getUserAvatar } from '../controllers/user.controller.js'
+import { loginUser, registerUser, getUser, getUserAvatar, googleHandled } from '../controllers/user.controller.js'
 import { verifyJWT } from '../middlewares/auth.middleware.js'
 import { upload } from '../middlewares/multer.middleware.js'
 
@@ -26,6 +26,9 @@ router.route("/get-current-user-avatar").get(
     getUserAvatar
 )
 
+router.route("/google").post(
+    googleHandled
+)
 
 
 export default router
