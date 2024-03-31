@@ -10,7 +10,10 @@ function Layout() {
   const login = location.pathname === '/login'
   const section = location.pathname === '/section'
   const signup = location.pathname === '/signup'
-  const dec = !(login || section || signup)
+  const mensignup = location.pathname === '/mensignup'
+  const dash = location.pathname === '/dash'
+  const profile = location.pathname === '/profile'
+  const dec = !(login || section || signup || mensignup || dash || profile)
   return (
     <>
     {dec && <Header />}

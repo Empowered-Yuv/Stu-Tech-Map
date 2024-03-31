@@ -3,6 +3,8 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 // import bodyParser from 'body-parser'
 import userRouter from "./routes/user.routes.js"
+import mentorRouter from "./routes/mentor.routes.js"
+import authRouter from './routes/auth.routes.js'
 
 const app = express()
 
@@ -37,6 +39,8 @@ app.use(cookieParser())
 
 //routes declaration
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/mentors", mentorRouter)
+app.use("/api/v1/auth", authRouter)
 
 
 

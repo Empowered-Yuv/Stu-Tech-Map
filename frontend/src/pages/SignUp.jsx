@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux"
-// import { setAvatar } from "../redux/actions/avatarActions.js";
 import axios from "axios";
 import OAuth from "../components/OAuth";
 
 function SignUp() {
   const [formData, setFormData] = useState({
-        fullName: '',
-        username: '',
-        email: '',
-        password: '',
-        avatar: null,
-        avatarPreview: null
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+    avatar: null,
+    avatarPreview: null,
   });
 
-  // const dispatch = useDispatch();
-  // const { avatarPreview } = useSelector((state) => state.avatar);
+  
 
   const [error, setError] = useState(null);
 
@@ -25,28 +22,31 @@ function SignUp() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    if (e.target.name === 'avatar') {
-      setFormData({ ...formData, avatar: e.target.files[0], avatarPreview: URL.createObjectURL(e.target.files[0]) });
-  } else {
+    if (e.target.name === "avatar") {
+      setFormData({
+        ...formData,
+        avatar: e.target.files[0],
+        avatarPreview: URL.createObjectURL(e.target.files[0]),
+      });
+    } else {
       setFormData({ ...formData, [e.target.id]: e.target.value });
-  }
+    }
   };
 
   const handleImageClick = () => {
-    document.getElementById('imageInput').click();
-};
+    document.getElementById("imageInput").click();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     const { fullName, username, email, password, avatar } = formData;
-        const formDataToSend = new FormData();
-        formDataToSend.append('fullName', fullName);
-        formDataToSend.append('username', username);
-        formDataToSend.append('email', email);
-        formDataToSend.append('password', password);
-        formDataToSend.append('avatar', avatar);
+    const formDataToSend = new FormData();
+    formDataToSend.append("fullName", fullName);
+    formDataToSend.append("username", username);
+    formDataToSend.append("email", email);
+    formDataToSend.append("password", password);
+    formDataToSend.append("avatar", avatar);
     try {
       setLoading(true); // Set loading state to true when submitting the form
       const res = await axios.post("/api/v1/users/signup", formDataToSend, {
@@ -83,24 +83,28 @@ function SignUp() {
   return (
     <>
       <div className='w-full h-screen flex justify-center items-center m-auto bg-[url("../img/Bg.jpg")]'>
-        <div className="container w-3/4 bg-white m-auto flex flex-col md:flex-row rounded-2xl">
-          <div className="first m-auto w-1/2">
-            <img src="../img/Sigup.png" alt="" className="h-[598px] mx-10" />
+        <div className="container bg-white flex flex-col md:flex-row rounded-2xl w-3/4">
+          <div className="w-full md:w-1/2 flex justify-center">
+            <img
+              src="../img/Sigup.png"
+              alt=""
+              className="w-full md:max-w-lg rounded-3xl"
+            />
           </div>
-          <div className="my-auto hover:shadow-md w-1/2">
-            <form action="" onSubmit={handleSubmit}>
-              <div className="flex flex-col w-full max-w-md px-4 py-4 md:py-2 bg-white rounded-lg border-[0.1px] border-black  sm:px-6 md:px-8 lg:px-10 mx-10">
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <form className="w-full max-w-md" onSubmit={handleSubmit}>
+              <div className="bg-slate-100 shadow-md rounded-2xl px-8 py-8 mb-1">
                 {/* dark:bg-gray-800 */}
                 {/* SignUp */}
-                <div className="self-center text-4xl text-[#002057] font-semibold sm:text-2xl ">
+                <div className="mb-6 text-4xl text-blue-900 font-semibold text-center ">
                   {/* dark:text-white */}
                   Sign Up
                 </div>
 
-                <div className="m-4">
+                <div className="mb-4">
                   {/* Avatar */}
-                  <div className="flex flex-col mb-2">
-                    <div className="flex relative">
+                  <div className="flex items-center mb-4">
+                    
                       <input
                         onChange={handleChange}
                         type="file"
@@ -108,23 +112,24 @@ function SignUp() {
                         accept="image/*"
                         name="avatar"
                         id="imageInput"
-                        className="hidden cursor-pointer"
+                        className="hidden cursor-pointer items-center"
                       />
 
-                      
                       <img
                         onClick={handleImageClick}
-                        src={formData.avatarPreview || "../../img/user_profile.png"}
+                        src={
+                          formData.avatarPreview || "../../img/Learners.png"
+                        }
                         alt="profile"
-                        className="mx-auto object-cover rounded-lg h-16 w-16 cursor-pointer"
+                        className="mx-auto object-cover rounded-full h-16 w-16 cursor-pointer"
                       />
-                    </div>
+                    
                   </div>
                   {/* fullName */}
-                  <div className="flex flex-col mb-2">
-                    <div className="flex relative ">
+                  <div className="flex items-center mb-4">
+                    
                       {/* icon of Full Name */}
-                      <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                      <span className="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                         <img
                           src="./img/Name.png"
                           alt=""
@@ -135,18 +140,18 @@ function SignUp() {
                       <input
                         type="text"
                         id="fullName"
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
+                        className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                         placeholder="Name"
                         onChange={handleChange}
                         required
                       />
-                    </div>
+                    
                   </div>
                   {/* username */}
-                  <div className="flex flex-col mb-2">
-                    <div className="flex relative ">
+                  <div className="flex items-center mb-4">
+                    
                       {/* icon of username */}
-                      <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                      <span className="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                         <img
                           src="./img/user1.png"
                           alt=""
@@ -157,18 +162,18 @@ function SignUp() {
                       <input
                         type="text"
                         id="username"
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
+                        className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                         placeholder="Username"
                         onChange={handleChange}
                         required
                       />
-                    </div>
+                    
                   </div>
                   {/* email */}
-                  <div className="flex flex-col mb-2">
-                    <div className="flex relative ">
+                  <div className="flex items-center mb-4">
+                    
                       {/* icon of email */}
-                      <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                      <span className="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                         <svg
                           width="15"
                           height="15"
@@ -183,18 +188,18 @@ function SignUp() {
                       <input
                         type="email"
                         id="email"
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
+                        className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                         placeholder="Email"
                         onChange={handleChange}
                         required
                       />
-                    </div>
+                    
                   </div>
                   {/* password */}
-                  <div className="flex flex-col mb-6">
-                    <div className="flex relative ">
+                  <div className="flex items-center mb-4">
+                    
                       {/* icon of password */}
-                      <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                      <span className="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                         <svg
                           width="15"
                           height="15"
@@ -209,44 +214,45 @@ function SignUp() {
                       <input
                         type="password"
                         id="password"
-                        className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-[#0c24ff] focus:border-transparent"
+                        className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                         placeholder="Password"
                         onChange={handleChange}
                         required
                       />
-                    </div>
+                    
                   </div>
                   {/* SignUp button */}
-                  <div className="flex w-full mb-4">
+                  <div className="mb-6 flex flex-col gap-4">
                     <button
                       disabled={loading}
                       type="submit"
-                      className="py-2 px-4  bg-[#ff8a00] hover:bg-[#ff7b00] focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                      className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                     >
                       {loading ? "Loading..." : "Sign Up"}
                     </button>
-                  </div>
-                  {/* SignUp with Google button */}
-                  <div className="flex w-full mb-4">
+                    {/* SignUp with Google button */}
                     <OAuth />
                   </div>
-                </div>
-                {/* Go to Login Page */}
-                <div className="flex items-center justify-center mb-4">
-                  {/* dark:text-gray-100 dark:hover:text-white */}
-                  <span className="ml-2">
-                    Already Have An Account?{" "}
-                    <Link to="/login">
-                      <span className="text-[#0c24ff]">
-                        {/* dark:text-[#fa8a00] */}
-                        Log In
-                      </span>
-                    </Link>
-                  </span>
-                </div>
-                {/* Error */}
-                <div className="text-center">
-                  {error && <p className="text-red-500 mt-5">{error.data}</p>}
+
+                  {/* Go to Login Page And Error*/}
+                  <div className="flex flex-col items-center justify-center mb-4">
+                    {/* dark:text-gray-100 dark:hover:text-white */}
+                    <p className="text-center text-gray-500 text-sm">
+                      Already Have An Account?{" "}
+                      <Link to="/login">
+                        <span className="text-[#0c24ff]">
+                          {/* dark:text-[#fa8a00] */}
+                          Log In
+                        </span>
+                      </Link>
+                    </p>
+
+                    {error && (
+                      <p className=" text-center text-red-500 mt-5">
+                        {error.data}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </form>

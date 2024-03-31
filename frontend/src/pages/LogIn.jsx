@@ -40,7 +40,7 @@ function LogIn() {
       dispatch(signInStart());
 
       const res = await axios.post(
-        "/api/v1/users/login",
+        "/api/v1/auth/login",
         {
           email: inputValue,
           password: pass,
@@ -122,7 +122,7 @@ function LogIn() {
                     <input
                       className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                       type="text"
-                      placeholder="Username or Email"
+                      placeholder="Email"
                       onChange={handleChange}
                       required
                     />

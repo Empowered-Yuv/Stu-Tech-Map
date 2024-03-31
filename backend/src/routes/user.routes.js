@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { loginUser, registerUser, getUser, getUserAvatar, googleHandled } from '../controllers/user.controller.js'
+import { registerUser, getUser, getUserAvatar, googleHandled } from '../controllers/user.controller.js'
 import { verifyJWT } from '../middlewares/auth.middleware.js'
 import { upload } from '../middlewares/multer.middleware.js'
 
@@ -11,10 +11,6 @@ router.route("/signup").post(
     registerUser
 )
 
-
-router.route("/login").post(
-    loginUser
-)
 
 router.route("/get-current-user").get(
     verifyJWT,

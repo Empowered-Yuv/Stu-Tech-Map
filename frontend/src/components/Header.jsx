@@ -25,12 +25,12 @@ function Header() {
   }, []);
 
   return (
-    <header className="shadow-md w-full sticky top-0 left-0 z-50">
+    <header className="shadow-md  max-w-screen sticky top-0 left-0 z-50">
       <div className="md:flex items-center justify-between bg-[#f7f8fc] py-4 md:px-10 px-7">
         <img
           className="w-1/3 md:w-1/6 object-cover "
           src="../img/revised_asset_2.png"
-          alt="profile"
+          alt=""
         />
 
         <div
@@ -131,6 +131,7 @@ function Header() {
             </div>
            )}
           </div>
+          
 
           
         </ul>

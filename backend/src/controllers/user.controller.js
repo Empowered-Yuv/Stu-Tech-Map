@@ -1,30 +1,12 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.models.js";
+import { Mentor } from "../models/mentor.models.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 // import { v2 as cloudinary, uploader } from 'cloudinary'
 
-const generateAccessAndRefreshTokens = async (userId) => {
-  try {
-    const user = await User.findById(userId);
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
 
-    user.refreshToken = refreshToken;
-
-    await user.save({
-      validateBeforeSave: false,
-    });
-
-    return { accessToken, refreshToken };
-  } catch (error) {
-    throw new ApiError(
-      500,
-      "Something went wrong while generating access and refresh tokens"
-    );
-  }
-};
 
 const registerUser = asyncHandler(async (req, res) => {
   // Destructure user details from the request body
@@ -75,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
       avatarUrl = result.secure_url;
     } else {
       // If avatar is not provided, use default image URL
-      avatarUrl = "https://i.ibb.co/5THrMrM/icons8-user-94.png"; // Replace with your default image URL
+      avatarUrl = "https://ibb.co/qFLnGy0"; // Replace with your default image URL
     }
 
     // Create user in the database
@@ -113,83 +95,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-const loginUser = asyncHandler(async (req, res) => {
-  //req body ---> data
-  try {
-    const { email, password } = req.body;
 
-    // username or email
-    if (!email) {
-      throw new ApiError(400, "Email is required");
-    }
-
-    function isValidEmail(e) {
-      return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(e);
-    }
-
-    let user;
-
-    if (isValidEmail(email)) {
-      // Input is an email, find user by email
-      user = await User.findOne({ email });
-    } else {
-      throw new ApiError(400, "Invalid Email")
-    }
-
-    //If user exists or not
-    if (!user) {
-      throw new ApiError(404, "User doesnt exist!");
-    }
-
-    // password check
-    const isPasswordValid = await user.isPasswordCorrect(password);
-
-    if (!isPasswordValid) {
-      throw new ApiError(404, "Invalid user credentials");
-    }
-
-    // access token or refresh token generate
-    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
-      user._id
-    );
-
-    // send cookies
-    const loggedInUser = await User.findById(user._id).select(
-      "-password -refreshToken"
-    );
-
-    // when we add options cookes r modifiable at server only not for any frontend user
-    const options = {
-      httpOnly: true,
-      secure: true,
-    };
-
-    return res
-      .status(200)
-      .cookie("accessToken", accessToken, options)
-      .cookie("refreshToken", refreshToken, options)
-      .json(
-        new ApiResponse(
-          200,
-          {
-            user: loggedInUser,
-            accessToken,
-            refreshToken,
-          },
-          "User Logged In Successfully"
-        )
-      );
-  } catch (error) {
-    if (error instanceof ApiError) {
-      return res
-        .status(error.statusCode)
-        .json(new ApiResponse(error.statusCode, error.data, error.message));
-    } else {
-      console.error(error);
-      return res.status(500).json(new ApiResponse(500, "Server Error"));
-    }
-  }
-});
 
 
 // Get avatar URL for logged-in user route
@@ -339,14 +245,15 @@ const googleHandled = asyncHandler( async (req, res) => {
     }
   }
 } )
+
+
   
 
 
 export 
 {
   registerUser,
-  loginUser,
   getUser,
   getUserAvatar,
-  googleHandled
+  googleHandled,
 }
