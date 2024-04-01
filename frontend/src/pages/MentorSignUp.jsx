@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import OAuth from "../components/OAuth.jsx";
+
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -245,8 +245,7 @@ function MentorSignUp() {
                     >
                       {loading ? "Loading..." : "Sign Up"}
                     </button>
-                    {/* SignUp with Google button */}
-                    <OAuth />
+                   
                   </div>
 
                   {/* Go to Login Page And Error*/}

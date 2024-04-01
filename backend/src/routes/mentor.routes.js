@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { registerMentor } from '../controllers/mentor.controller.js'
-import { verifyJWT } from '../middlewares/auth.middleware.js'
+
+//import { verifyJWT } from '../middlewares/auth.middleware.js'
 import { upload } from '../middlewares/multer.middleware.js'
 
 
@@ -11,5 +12,6 @@ router.route("/signup").post(
     registerMentor
 )
 
+router.route("")
 
 export default router

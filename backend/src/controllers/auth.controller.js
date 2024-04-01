@@ -6,6 +6,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 
 
+
 const generateAccessAndRefreshTokensForUser = async (userId) => {
     try {
       const user = await User.findById(userId);
@@ -163,7 +164,24 @@ const generateAccessAndRefreshTokensForUser = async (userId) => {
     }
   });
 
+  const getAvatar = async (id, isMentor) => {
+    try {
+        let user;
+        if (!isMentor) {
+            user = await User.findById(id).select('-password');
+        } else  {
+            user = await Mentor.findById(id).select('-password');
+        }
+
+        return user;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw error;
+    }
+};
+  
+ 
   export
   {
-    loginMember
+    loginMember, getAvatar
   }

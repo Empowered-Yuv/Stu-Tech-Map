@@ -1,6 +1,7 @@
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from '../models/user.models.js'
+import { Mentor } from '../models/mentor.models.js'
 import jwt from "jsonwebtoken"
 
 
@@ -14,21 +15,33 @@ export const verifyJWT = asyncHandler( async (req, _, next) =>{
         }
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-    
-        const user = await User.findById(decodedToken?._id).select(
-            "-password -refreshToken"
-        )
-    
-    
-        if (!user) {
-            //next_video: discuss about frontend
-            throw new ApiError(401, "Invalid Access Token")
+
+        let user
+        if (!decodedToken?.isMentor) {
+             user = await User.findById(decodedToken?._id).select(
+                "-password -refreshToken"
+            )
+        }
+        else {
+            user = await Mentor.findById(decodedToken?._id).select(
+                "-password -refreshToken"
+            )
         }
     
+        
+        if (!user) {
+            throw new ApiError("Account not found");
+        }
+
+        // Attach the user object to the request for further processing
+        req.user = user;
+
+        // Call the next middleware
+        next();
     
-        req.user = user
-        next()
+      
     } catch (error) {
         throw new ApiError(401, error?.message || "Invalid at")
     }
 } )
+

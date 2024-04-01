@@ -108,13 +108,14 @@ function Header() {
             className="flex
          gap-4 md:ml-8 flex-col md:flex-row"
           >
-             {currentUser ? (
+             {currentUser ? ( <Link to="/profile">
             
             <img
                 className="rounded-full h-10 w-10 object-cover"
-                src={avatarUrl}
+                src={avatarUrl || "../../img/Learners.png"}
                 alt="profile"
               />
+              </Link>
              
            ) : (  
             <div className="flex gap-4 md:ml-8 flex-col md:flex-row">

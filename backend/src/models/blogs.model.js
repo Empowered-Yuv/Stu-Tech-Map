@@ -2,6 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 const blogSchema = new Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -20,8 +24,16 @@ const blogSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Mentor",
     },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+
+export const Blog = mongoose.model("Blog", blogSchema);

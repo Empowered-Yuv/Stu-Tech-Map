@@ -7,7 +7,7 @@ import {
   signInSuccess,
 } from "../redux/user/userSlice.js";
 import { Link, useNavigate } from "react-router-dom";
-import OAuth from "../components/OAuth.jsx";
+
 
 function LogIn() {
   const [inputValue, setInputValue] = useState("");
@@ -167,14 +167,13 @@ function LogIn() {
                     {loading ? "Loading..." : "Log In"}
                   </button>
 
-                  {/* Google Button */}
-                  <OAuth />
+                  
                 </div>
                 {/* Go to SignUp Page and Error */}
                 <div className="flex flex-col items-center justify-center mb-4">
                   <p className="text-center text-gray-500 text-sm">
                     Don't Have An Account?
-                    <Link to={"/signup"}>
+                    <Link to={"/section"}>
                       <span className="text-blue-600 hover:text-blue-800 ">
                         {/* dark:text-[#fa8a00] */}
                         Sign Up

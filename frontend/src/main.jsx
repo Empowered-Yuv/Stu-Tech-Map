@@ -20,8 +20,10 @@ import { Provider } from "react-redux";
 import { store, persistor } from "../src/redux/store.js";
 import MentorSignUp from "./pages/MentorSignUp.jsx";
 import Profile from "./pages/Profile.jsx";
-import PrivateRoute from "./components/PrivateRoute.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx"
 import DashBoard from "./pages/DashBoard.jsx";
+import CreatePost from "./pages/CreatePost.jsx";
+import OnlyMentorPrivateRoute from "./components/OnlyMentorPrivateRoute.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,8 +37,15 @@ const router = createBrowserRouter(
       <Route path="mensignup" element={<MentorSignUp />} />
       <Route path="dash" element={<DashBoard/>} />
       <Route path="profile" element={<Profile />} />
+      <Route path="create-post" element={<CreatePost />} />
 
       {/* Nested route for PrivateRoute */}
+      <Route element={<OnlyMentorPrivateRoute />}>
+        {/* Private routes go here */}
+        
+      
+      </Route>
+
       <Route element={<PrivateRoute />}>
         {/* Private routes go here */}
         

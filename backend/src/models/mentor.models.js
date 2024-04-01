@@ -29,6 +29,10 @@ const mentorSchema = new Schema(
     avatar: {
       type: String,
     },
+    isMentor: {
+      type:Boolean,
+      default: true,
+    },
     refreshToken: {
       type: String,
     },
