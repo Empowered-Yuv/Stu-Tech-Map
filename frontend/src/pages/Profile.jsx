@@ -8,6 +8,7 @@ import {
   faSignOutAlt,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function Profile() {
   return (
@@ -27,48 +28,53 @@ function Profile() {
                 <a
                   href="#"
                   className="block px-6 py-3 hover:bg-gray-700 flex items-center"
-                >
+                ><Link to="/dash">
                   <FontAwesomeIcon
                     icon={faTachometerAlt}
                     className="text-gray-400 mr-5"
                   />
                   Dashboard
+                  </Link>
                 </a>
+                
               </li>
               <li>
                 <a
                   href="#"
                   className="block px-6 py-3 hover:bg-gray-700 flex items-center"
-                >
+                ><Link to="/">
                   <FontAwesomeIcon
                     icon={faHome}
                     className="text-gray-400 mr-5"
                   />
                   Home
+                  </Link>
                 </a>
               </li>
               <li>
                 <a
                   href="#"
                   className="block px-6 py-3 hover:bg-gray-700 flex items-center"
-                >
+                ><Link to="/about">
                   <FontAwesomeIcon
                     icon={faInfoCircle}
                     className="text-gray-400 mr-5"
                   />
                   About
+                  </Link>
                 </a>
               </li>
               <li>
                 <a
                   href="#"
                   className="block px-6 py-3 hover:bg-gray-700 flex items-center"
-                >
+                ><Link to="/contact">
                   <FontAwesomeIcon
                     icon={faEnvelope}
                     className="text-gray-400 mr-5"
                   />
                   Contact
+                  </Link>
                 </a>
               </li>
             </ul>
@@ -108,7 +114,7 @@ function Profile() {
 
                       <img
                         alt="profile"
-                        src="./images/user1.png"
+                        src="../../img/Learners.png"
                         class="mx-auto object-cover rounded-full h-16 w-16 cursor-pointer"
                       />
                     </div>
@@ -116,7 +122,7 @@ function Profile() {
                     <div class="flex items-center mb-4">
                       <span class="w-10 h-10 rounded-l-md flex items-center justify-center bg-gray-200">
                         <img
-                          src="./images/user1.png"
+                          src="../../img/user1.png"
                           alt=""
                           class="w-[16px] h-[16px] flex justify-center items-center"
                         />

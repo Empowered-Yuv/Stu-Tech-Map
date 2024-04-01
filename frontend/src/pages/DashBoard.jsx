@@ -123,26 +123,43 @@ function DashBoard() {
             <ul className="py-4">
             <li>
                 <a href="#" className="block px-6 py-3 hover:bg-gray-700 flex items-center">
+                  <Link to="/profile">
                   <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-5" />
                   Profile
+                  </Link>
                 </a>
               </li>
               <li>
                 <a href="#" className="block px-6 py-3 hover:bg-gray-700 flex items-center">
-                  <FontAwesomeIcon icon={faHome} className="text-gray-400 mr-5" />
+                <Link to="/">
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    className="text-gray-400 mr-5"
+                  />
                   Home
+                  </Link>
                 </a>
               </li>
               <li>
                 <a href="#" className="block px-6 py-3 hover:bg-gray-700 flex items-center">
-                  <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 mr-5" />
+                <Link to="/about">
+                  <FontAwesomeIcon
+                    icon={faInfoCircle}
+                    className="text-gray-400 mr-5"
+                  />
                   About
+                  </Link>
                 </a>
               </li>
               <li>
                 <a href="#" className="block px-6 py-3 hover:bg-gray-700 flex items-center">
-                  <FontAwesomeIcon icon={faEnvelope} className="text-gray-400 mr-5" />
+                <Link to="/contact">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="text-gray-400 mr-5"
+                  />
                   Contact
+                  </Link>
                 </a>
               </li>
             </ul>
@@ -164,7 +181,7 @@ function DashBoard() {
           <div className="relative inline-block ml-auto">
             
               <img
-                src="https://via.placeholder.com/40"
+                src="../../img/Mentor.png"
                 alt="Profile"
                 className="w-10 h-10 rounded-full cursor-pointer"
               />
@@ -178,19 +195,14 @@ function DashBoard() {
             {/* Blog Item */}
             <div className="bg-gray-200 p-4 rounded-lg flex items-start space-x-4">
               <img
-                src="https://via.placeholder.com/800x400"
+                src="../../img/arvr.jpg"
                 alt="Blog Image"
                 className="w-64 h-auto rounded-lg"
               />
               <div>
-                <h3 className="text-lg font-semibold mb-2">Blog Title</h3>
+                <h3 className="text-lg font-semibold mb-2">AR VR</h3>
                 <p className="text-gray-500">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                  efficitur vestibulum purus non suscipit. Aliquam erat volutpat.
-                  Sed nec elit ac libero aliquam tincidunt. Phasellus condimentum
-                  massa sed magna scelerisque placerat. Cras quis tortor sed magna
-                  luctus convallis. Proin interdum eros eget magna molestie, eu
-                  volutpat odio tristique.
+                As AR and VR technologies continue to mature, they hold the potential to fundamentally transform how we work, learn, play, and connect with each other in the digital age. Whether it's enhancing our reality with useful information or transporting us to entirely new worlds, AR and VR are reshaping the boundaries of human experience and opening up exciting possibilities for the future.
                 </p>
               </div>
             </div>

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
+import { useSelector } from "react-redux";
 
-import { ScrollRestoration } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 
 function Home() {
   const [count, setCount] = useState(false);
 
-  
+  const { currentUser } = useSelector((state) => state.user)
 
   
 
@@ -31,9 +32,11 @@ function Home() {
               planning, study skills, mental health, and more.
             </p>
             <div className="flex justify-center">
+              {currentUser ? (<Link to="/section">
               <button className="inline-flex text-white bg-[#ff8a00] border-0 py-2 px-6 focus:outline-none hover:bg-[#ff7b00] rounded-lg text-lg">
                 Get Started
               </button>
+              </Link>) : null}
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
@@ -106,109 +109,7 @@ function Home() {
         {/* </ScrollTrigger> */}
       </section>
 
-      {/* featues */}
-
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-col text-center w-full mb-20">
-            <h2 className="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">
-              ROOF PARTY POLAROID
-            </h2>
-            <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900">
-              Master Cleanse Reliac Heirloom
-            </h1>
-          </div>
-          <div className="flex flex-wrap -m-4">
-            <div className="p-4 md:w-1/3">
-              <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-gray-900 text-lg title-font font-medium">
-                    Shooting Stars
-                  </h2>
-                </div>
-                <div className="flex-grow">
-                  <p className="leading-relaxed text-base">
-                    Blue bottle crucifix vinyl post-ironic four dollar toast
-                    vegan taxidermy. Gastropub indxgo juice poutine.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/3">
-              <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  </div>
-                  <h2 className="text-gray-900 text-lg title-font font-medium">
-                    The Catalyzer
-                  </h2>
-                </div>
-                <div className="flex-grow">
-                  <p className="leading-relaxed text-base">
-                    Blue bottle crucifix vinyl post-ironic four dollar toast
-                    vegan taxidermy. Gastropub indxgo juice poutine.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/3">
-              <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
-                <div className="flex items-center mb-3">
-                  <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="6" cy="6" r="3"></circle>
-                      <circle cx="6" cy="18" r="3"></circle>
-                      <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-gray-900 text-lg title-font font-medium">
-                    Neptune
-                  </h2>
-                </div>
-                <div className="flex-grow">
-                  <p className="leading-relaxed text-base">
-                    Blue bottle crucifix vinyl post-ironic four dollar toast
-                    vegan taxidermy. Gastropub indxgo juice poutine.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* blogs */}
 
@@ -219,19 +120,16 @@ function Home() {
               <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                 <img
                   className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src="https://dummyimage.com/720x400"
+                  src="../../img/code.jpg"
                   alt="blog"
                 />
                 <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    CATEGORY
-                  </h2>
+                  
                   <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    The Catalyzer
+                    Code
                   </h1>
                   <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
+                  Coding, or programming, is the language of computers. Learning to code opens up a world of opportunities and benefits
                   </p>
                   <div className="flex items-center flex-wrap ">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
@@ -286,19 +184,23 @@ function Home() {
               <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                 <img
                   className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src="https://dummyimage.com/721x401"
+                  src="../../img/AI.jpg"
                   alt="blog"
                 />
                 <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    CATEGORY
-                  </h2>
+                  
                   <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    The 400 Blows
+                    Artificial Intelligence
                   </h1>
                   <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
+                  AI has the potential to bring about significant advancements and improvements in many aspects of human life, but it also presents challenges that need to be addressed responsibly to ensure its beneficial and ethical use.
+
+
+
+
+
+
+
                   </p>
                   <div className="flex items-center flex-wrap">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
@@ -353,19 +255,16 @@ function Home() {
               <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                 <img
                   className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src="https://dummyimage.com/722x402"
+                  src="../../img/arvr.jpg"
                   alt="blog"
                 />
                 <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    CATEGORY
-                  </h2>
+                  
                   <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    Shooting Stars
+                    AR & VR
                   </h1>
                   <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
+                  As AR and VR technologies continue to mature, they hold the potential to fundamentally transform how we work, learn, play, and connect with each other in the digital age. 
                   </p>
                   <div className="flex items-center flex-wrap ">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">

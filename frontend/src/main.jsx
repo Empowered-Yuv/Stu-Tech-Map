@@ -35,20 +35,23 @@ const router = createBrowserRouter(
       <Route path="section" element={<Section />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="mensignup" element={<MentorSignUp />} />
-      <Route path="dash" element={<DashBoard/>} />
-      <Route path="profile" element={<Profile />} />
-      <Route path="create-post" element={<CreatePost />} />
+      
+      <Route element={<PrivateRoute />}>
+      
 
       {/* Nested route for PrivateRoute */}
       <Route element={<OnlyMentorPrivateRoute />}>
-        {/* Private routes go here */}
+        
+        
+        <Route path="create-post" element={<CreatePost />} />
         
       
       </Route>
+      <Route path="dash" element={<DashBoard />} />
+      <Route path="profile" element={<Profile />} />
 
-      <Route element={<PrivateRoute />}>
-        {/* Private routes go here */}
-        
+      
+       
       
       </Route>
     </Route>
