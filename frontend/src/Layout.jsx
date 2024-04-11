@@ -14,7 +14,8 @@ function Layout() {
   const dash = location.pathname === '/dash'
   const profile = location.pathname === '/profile'
   const create_post = location.pathname === '/create-post'
-  const dec = !(login || section || signup || mensignup || dash || profile || create_post)
+  const forgot_password = location.pathname === '/forgot-password'
+  const dec = !(login || section || signup || mensignup || dash || profile || create_post || forgot_password)
   return (
     <>
     {dec && <Header />}
