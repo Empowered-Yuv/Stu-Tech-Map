@@ -32,11 +32,11 @@ function Home() {
               planning, study skills, mental health, and more.
             </p>
             <div className="flex justify-center">
-              {currentUser ? (<Link to="/section">
+              {currentUser ?  null : (<Link to="/section">
               <button className="inline-flex text-white bg-[#ff8a00] border-0 py-2 px-6 focus:outline-none hover:bg-[#ff7b00] rounded-lg text-lg">
                 Get Started
               </button>
-              </Link>) : null}
+              </Link>) }
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">

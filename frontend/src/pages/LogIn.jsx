@@ -8,11 +8,12 @@ import {
 } from "../redux/user/userSlice.js";
 import { Link, useNavigate } from "react-router-dom";
 
-
 function LogIn() {
   const [inputValue, setInputValue] = useState("");
 
   const [pass, setPass] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const { loading, error } = useSelector((state) => state.user);
 
@@ -30,6 +31,10 @@ function LogIn() {
 
   const handlePasswordChange = (e) => {
     setPass(e.target.value);
+  };
+
+  const handleCheckboxChange = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -143,11 +148,29 @@ function LogIn() {
                     </span>
                     <input
                       className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray -400 focus:outline-none focus:ring focus:border-blue-300"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="Password"
                       onChange={handlePasswordChange}
                       required
                     />
+                  </div>
+
+                  <div className="flex items-center mb-4">
+                    {/* show password */}
+
+                    <input
+                      type="checkbox"
+                      checked={showPassword}
+                      onChange={handleCheckboxChange}
+                      id="check"
+                      className="ms-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                    />
+                    <label
+                      htmlFor="check"
+                      className="ms-2 text-sm font-medium text-gray-600"
+                    >
+                      Show Password
+                    </label>
                   </div>
                   {/* Forgot Your Password? */}
                   <div className="flex justify-end">
@@ -166,8 +189,6 @@ function LogIn() {
                   >
                     {loading ? "Loading..." : "Log In"}
                   </button>
-
-                  
                 </div>
                 {/* Go to SignUp Page and Error */}
                 <div className="flex flex-col items-center justify-center mb-4">

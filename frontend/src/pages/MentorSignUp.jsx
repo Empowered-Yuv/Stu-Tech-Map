@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function MentorSignUp() {
-
-
   const [formData, setFormData] = useState({
     fullName: "",
     expertise: "",
@@ -16,7 +14,7 @@ function MentorSignUp() {
     avatarPreview: null,
   });
 
-  
+  const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState(null);
 
@@ -38,6 +36,10 @@ function MentorSignUp() {
 
   const handleImageClick = () => {
     document.getElementById("imageInput").click();
+  };
+
+  const handleCheckboxChange = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -83,9 +85,6 @@ function MentorSignUp() {
       }
     }
   };
-
-
-
 
   return (
     <>
@@ -228,13 +227,31 @@ function MentorSignUp() {
                     </span>
                     {/* password */}
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password"
                       className="rounded-r-md appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                       placeholder="Password"
                       onChange={handleChange}
                       required
                     />
+                  </div>
+
+                  <div className="flex items-center mb-4">
+                    {/* show password */}
+
+                    <input
+                      type="checkbox"
+                      checked={showPassword}
+                      onChange={handleCheckboxChange}
+                      id="check"
+                      className="ms-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                    />
+                    <label
+                      htmlFor="check"
+                      className="ms-2 text-sm font-medium text-gray-600"
+                    >
+                      Show Password
+                    </label>
                   </div>
                   {/* SignUp button */}
                   <div className="mb-6 flex flex-col gap-4">
@@ -245,7 +262,6 @@ function MentorSignUp() {
                     >
                       {loading ? "Loading..." : "Sign Up"}
                     </button>
-                   
                   </div>
 
                   {/* Go to Login Page And Error*/}
