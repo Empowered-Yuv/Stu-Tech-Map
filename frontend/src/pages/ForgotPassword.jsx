@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function ForgotPassword() {
@@ -34,7 +34,7 @@ function ForgotPassword() {
             error.response.data &&
             error.response.data.message
           ) {
-            setMessage(error.response.data);
+            setMessage(error.response.data.message);
           } else {
             setMessage("An error occurred. Please try again later.");
           }

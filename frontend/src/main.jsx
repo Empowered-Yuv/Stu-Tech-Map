@@ -25,6 +25,7 @@ import DashBoard from "./pages/DashBoard.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
 import OnlyMentorPrivateRoute from "./components/OnlyMentorPrivateRoute.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<SignUp />} />
       <Route path="mensignup" element={<MentorSignUp />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
+      <Route path="reset-password" element={<ResetPassword />} />
       
       <Route element={<PrivateRoute />}>
       
