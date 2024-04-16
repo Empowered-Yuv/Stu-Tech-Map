@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { loginMember } from "../controllers/auth.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { getAvatar } from "../controllers/auth.controller.js";
+import { getAvatar, forgotPassword } from "../controllers/auth.controller.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -13,7 +13,7 @@ router.route("/login").post(loginMember);
 router.route(
   "/get-avatar",
   verifyJWT,
-  asyncHandler(async (req, res) => {
+  asyncHandler(
     async (req, res) => {
       try {
         const { id, isMentor } = req.user;
@@ -40,8 +40,10 @@ router.route(
           return res.status(500).json(new ApiResponse(500, "Server Error"));
         }
       }
-    };
-  })
+    })
+  
 );
+
+router.route("/forgot-password").post(forgotPassword);
 
 export default router;

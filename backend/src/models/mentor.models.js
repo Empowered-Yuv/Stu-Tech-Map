@@ -30,8 +30,14 @@ const mentorSchema = new Schema(
       type: String,
     },
     isMentor: {
-      type:Boolean,
+      type: Boolean,
       default: true,
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
     },
     refreshToken: {
       type: String,
