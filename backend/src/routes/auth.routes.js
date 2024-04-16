@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginMember } from "../controllers/auth.controller.js";
+import { loginMember, resetPassword } from "../controllers/auth.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { getAvatar, forgotPassword } from "../controllers/auth.controller.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -45,5 +45,7 @@ router.route(
 );
 
 router.route("/forgot-password").post(forgotPassword);
+
+router.route("/reset-password").post(resetPassword);
 
 export default router;

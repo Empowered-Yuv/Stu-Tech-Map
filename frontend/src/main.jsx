@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<SignUp />} />
       <Route path="mensignup" element={<MentorSignUp />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
-      <Route path="reset-password" element={<ResetPassword />} />
+      <Route path="reset-password/:token" element={<ResetPassword />} />
       
       <Route element={<PrivateRoute />}>
       

@@ -176,7 +176,9 @@ function LogIn() {
                   <div className="flex justify-end">
                     <span className="text-xs text-blue-600 ">
                       {/* dark:text-slate-100 */}
+                      <Link to="/forgot-password">
                       Forgot Your Password?
+                      </Link>
                     </span>
                   </div>
                 </div>

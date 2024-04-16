@@ -269,4 +269,59 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 });
 
-export { loginMember, getAvatar, forgotPassword };
+const resetPassword = asyncHandler(async (req, res) => {
+  try {
+    const { token, password } = req.body
+
+    let member
+
+    const user = await User.findOne({ resetPasswordToken: token})
+    const mentor = await Mentor.findOne({ resetPasswordToken: token})
+    if (user) {
+      member = user
+    } else {
+      member = mentor
+    }
+
+    if (member.resetPasswordExpires < Date.now()) {
+      return res
+      .status(400)
+      .json(
+        new ApiError(
+          400,
+          "Invalid or expired token"
+        )
+      )
+    }
+
+    member.password = password
+    member.resetPasswordToken = null
+    member.resetPasswordExpires = null
+    
+    await member.save({
+      validateBeforeSave: false,
+    })
+
+    return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200, 
+        {},
+        "Password Reset Succesfully Now Go to login Again"
+      )
+    )
+
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return res
+        .status(error.statusCode)
+        .json(new ApiResponse(error.statusCode, error.data, error.message));
+    } else {
+      console.error(error);
+      return res.status(500).json(new ApiResponse(500, "Server Error"));
+    }
+  }
+})
+
+export { loginMember, getAvatar, forgotPassword, resetPassword };

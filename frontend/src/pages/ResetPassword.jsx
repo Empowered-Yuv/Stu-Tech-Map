@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import axios from "axios"
 
 function ResetPassword() {
+
+  const { token } = useParams();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -30,8 +32,8 @@ function ResetPassword() {
     }
 
     try {
-      await axios.post('/api/auth/reset-password', {
-        // token: match.params.token,
+      const res = await axios.post('/api/v1/auth/reset-password', {
+        token,
         password
       });
       setMessage('Password reset successful');
