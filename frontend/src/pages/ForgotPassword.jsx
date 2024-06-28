@@ -6,6 +6,8 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
 
   const [message, setMessage] = useState("");
+
+  const [backup, setBackup] = useState(true)
   
 
   const handleChange = (e) => {
@@ -28,12 +30,14 @@ function ForgotPassword() {
 
       setMessage("Password reset email sent. Check your inbox.\n After reseting ur password Login Again");
       
+      
     } catch (error) {
         if (
             error.response &&
             error.response.data &&
             error.response.data.message
           ) {
+            setBackup(false)
             setMessage(error.response.data.message);
           } else {
             setMessage("An error occurred. Please try again later.");
@@ -101,7 +105,7 @@ function ForgotPassword() {
                 </div>
                 {/* Go to SignUp Page and Error */}
                 <div className="flex flex-col items-center justify-center mb-4">
-                  <p className="text-center text-gray-500 text-sm">
+                  {!backup && <p className="text-center text-gray-500 text-sm">
                     Don't Have An Account?
                     <Link to={"/section"}>
                       <span className="text-blue-600 hover:text-blue-800 ">
@@ -109,17 +113,7 @@ function ForgotPassword() {
                         Sign Up
                       </span>
                     </Link>
-                  </p>
-
-                  <p className="text-center text-gray-500 text-sm">
-                    If u hv reset ur password
-                    <Link to={"/login"}>
-                      <span className="text-blue-600 hover:text-blue-800 ">
-                        {/* dark:text-[#fa8a00] */}
-                        Log In
-                      </span>
-                    </Link>
-                  </p>
+                  </p>}
 
                   {message && (
                     <p className=" text-center text-red-500 mt-5">{message}</p>

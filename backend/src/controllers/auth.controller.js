@@ -3,6 +3,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.models.js";
 import { Mentor } from "../models/mentor.models.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { v4 as uuidv4 } from 'uuid';
+import nodemailer from 'nodemailer';
 
 const generateAccessAndRefreshTokensForUser = async (userId) => {
   try {
@@ -224,7 +226,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
       service: "Gmail", // Or any other SMTP service provider
       auth: {
         user: "stutechmap@gmail.com", // Your email address
-        pass: "Stutechmap143", // Your email password
+        pass: "aubk fbzb xwqa tfgz", // Your email password
       },
     });
 
@@ -251,7 +253,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        {},
+        member,
         "Password reset email sent"
       )
     )
